@@ -1,6 +1,6 @@
 # Jargon Alexa Hello World skill
 
-This is a fork of the [Alexa Hello World skill template](https://github.com/alexa/skill-sample-nodejs-hello-world#readme) that uses the [Jargon SDK](https://github.com/JargonInc/jargon-sdk-nodejs/tree/master/packages/alexa-skill-sdk#readme) to manage content.
+This is a fork of the [Alexa Hello World skill template](https://github.com/alexa/skill-sample-nodejs-hello-world#readme) template that uses the [Jargon SDK](https://github.com/JargonInc/jargon-sdk-nodejs/tree/master/packages/alexa-skill-sdk#readme) to manage content.
 
 ## Changes from the source template
 * Add dependency on the Jargon SDK npm package (@jargon/alexa-skill-sdk)
