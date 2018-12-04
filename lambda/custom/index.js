@@ -2,18 +2,20 @@
 /* eslint-disable  no-console */
 
 const Alexa = require('ask-sdk-core');
+const Jargon = require('@jargon/alexa-skill-sdk')
+const ri = Jargon.ri
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   handle(handlerInput) {
-    const speechText = 'Welcome to the Alexa Skills Kit, you can say hello!';
-
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
-      .withSimpleCard('Hello World', speechText)
+    const item = ri('WELCOME')
+    const title = ri('CARD_TITLE')
+    return handlerInput.jrb
+      .speak(item)
+      .reprompt(item)
+      .withSimpleCard(title, item)
       .getResponse();
   },
 };
@@ -24,11 +26,13 @@ const HelloWorldIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
   },
   handle(handlerInput) {
-    const speechText = 'Hello World!';
+    const item = ri('HELLO', { name: 'World'})
+    const title = ri('CARD_TITLE')
 
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard('Hello World', speechText)
+    return handlerInput.jrb
+      .speak(item)
+      .reprompt(item)
+      .withSimpleCard(title, item)
       .getResponse();
   },
 };
@@ -39,12 +43,13 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'You can say hello to me!';
+    const speechText = ri('HELP')
+    const title = ri('CARD_TITLE')
 
-    return handlerInput.responseBuilder
+    return handlerInput.jrb
       .speak(speechText)
       .reprompt(speechText)
-      .withSimpleCard('Hello World', speechText)
+      .withSimpleCard(title, speechText)
       .getResponse();
   },
 };
@@ -56,11 +61,12 @@ const CancelAndStopIntentHandler = {
         || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
   },
   handle(handlerInput) {
-    const speechText = 'Goodbye!';
+    const speechText = ri('GOODBYE')
+    const title = ri('CARD_TITLE')
 
-    return handlerInput.responseBuilder
+    return handlerInput.jrb
       .speak(speechText)
-      .withSimpleCard('Hello World', speechText)
+      .withSimpleCard(title, speechText)
       .getResponse();
   },
 };
@@ -83,14 +89,15 @@ const ErrorHandler = {
   handle(handlerInput, error) {
     console.log(`Error handled: ${error.message}`);
 
-    return handlerInput.responseBuilder
-      .speak('Sorry, I can\'t understand the command. Please say again.')
-      .reprompt('Sorry, I can\'t understand the command. Please say again.')
+    const speechText = ri('ERROR')
+    return handlerInput.jrb
+      .speak(speechText)
+      .reprompt(speechText)
       .getResponse();
   },
 };
 
-const skillBuilder = Alexa.SkillBuilders.custom();
+const skillBuilder = new Jargon.JargonSkillBuilder().wrap(Alexa.SkillBuilders.custom());
 
 exports.handler = skillBuilder
   .addRequestHandlers(

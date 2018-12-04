@@ -1,0 +1,14 @@
+{
+  "CARD_TITLE":"Hello World",
+  "ERROR":{
+    "v1":"Sorry, I can't understand the command. Please say again.",
+    "v2":"Sorry, I didn't get that. Could you say it again?."
+  },
+  "GOODBYE":"Goodbye!",
+  "HELLO":{
+    "v1":"Hello {name}",
+    "v2":"Hi there {name}!"
+  },
+  "HELP":"You can say hello to me!",
+  "WELCOME":"Welcome to the Alexa Skills Kit using the Jargon SDK, you can say hello!"
+}
